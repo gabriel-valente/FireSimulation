@@ -5,6 +5,6 @@
 using namespace std;
 
 vector<vector<int>> Generate(int height, int width);
-void Update();
+void Update(vector<vector<int>> map);
 
 #endif
