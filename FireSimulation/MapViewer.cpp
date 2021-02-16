@@ -1,8 +1,8 @@
 ﻿#include "MapViewer.h"
+#include "Console.h"
 
 #include <iostream>
 #include <random>
-#include "Windows.h"
 
 using namespace std;
 
@@ -12,30 +12,15 @@ void Draw(vector<vector<int>> map) {
 	mt19937 gen(rd());
 	uniform_real_distribution<> treeRandom(5, 7); //Random between 5 and 6 (5=Spades ASCII Number; 6=Clubs ASCII Number)
 
-	//initialize objects for cursor manipulation
-	HANDLE hStdout;
-	COORD destCoord;
-	hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
-
-	//position cursor at start of window
-	destCoord.X = 0;
-	destCoord.Y = 0;
-	SetConsoleCursorPosition(hStdout, destCoord);
-
-	HANDLE out = GetStdHandle(STD_OUTPUT_HANDLE);
-
-    CONSOLE_CURSOR_INFO     cursorInfo;
-
-    GetConsoleCursorInfo(out, &cursorInfo);
-    cursorInfo.bVisible = false; // set the cursor visibility
-    SetConsoleCursorInfo(out, &cursorInfo);
+	SetCursorPosition(0, 0);
 	
 	//Displays the map
-	for (int i = 0; i < map.size(); ++i) {
-		for (int j = 0; j < map[i].size(); ++j)
-			if (map[i][j] == 1) cout << (char)treeRandom(gen) << " "; //Displays a Spade or a Clue where there is a 1 in the vector
-			else if (map[i][j] == 2) cout << (char)176 << " ";
-			else cout << "  "; 	//Displays an empty space where there is a 0 in the vector
+	for (int i = 0; i < map.size(); ++i) { //Direction Y
+		for (int j = 0; j < map[i].size(); ++j) { //Direction X
+			if (map[i][j] == 1) cout << (char)treeRandom(gen) << " "; //Displays a Spade or a Clue where there is a 1 in the vector (Tree)
+			else if (map[i][j] == 2) cout << (char)176 << " "; //Displays a dotted squeare where there is a 2 in the vector (Fire)
+			else cout << "  "; 	//Displays an empty space where there is a 0 in the vector (Empty)
+		}
 		cout << endl;
 	}
 }
@@ -65,8 +50,4 @@ vector<vector<int>> Generate(int height, int width)
 	Draw(map);
 	
 	return map;
-}
-
-void Update(vector<vector<int>> map) {
-	Draw(map);
 }

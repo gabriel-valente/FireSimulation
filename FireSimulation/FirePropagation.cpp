@@ -4,8 +4,13 @@
 #include <random>
 #include <vector>
 
+#include "Console.h"
+
 using namespace std;
 
+int mapNoChanges = 0;
+
+//Sets tree on fire with 50% of probability
 int SetFire() {
 	//Random generator stuff
 	random_device rd;
@@ -14,10 +19,11 @@ int SetFire() {
 	return fireRandom(gen);
 }
 
+//Propagates fire to the neighbor trees
 vector<vector<int>> Propagate(vector<vector<int>> map) {
 	vector<vector<int>> currentMap = map;
 
-	
+	//Stuff not very funny
 	for (int i = 0; i < map.size(); i++)
 	{
 		for (int j = 0; j < map[i].size(); j++) {
@@ -67,6 +73,12 @@ vector<vector<int>> Propagate(vector<vector<int>> map) {
 				}	
 			}
 		}
+	}
+
+	if (currentMap == map && mapNoChanges < 3) {
+		mapNoChanges++;
+	} else if (currentMap == map && mapNoChanges >= 3) {
+		EndSimulation(map.size());		
 	}
 
 	return currentMap;

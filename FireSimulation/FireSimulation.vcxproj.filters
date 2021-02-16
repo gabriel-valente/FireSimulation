@@ -24,12 +24,24 @@
     <ClCompile Include="FirePropagation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Console.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Messages.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MapViewer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="FirePropagation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Console.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Messages.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
